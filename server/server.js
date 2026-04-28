@@ -5,7 +5,7 @@ const httpServer = createServer();
 
 const io = new Server(httpServer, {
   cors: {
-    origin: "http://localhost:3000",
+    origin: ["http://localhost:3000", "https://patient-system-9464.vercel.app"],
   },
 });
 
@@ -57,6 +57,8 @@ staffNs.on("connection", (socket) => {
   console.log("Staff connected:", socket.id);
 });
 
-httpServer.listen(3001, () => {
-  console.log("Socket server running on http://localhost:3001");
+const PORT = process.env.PORT || 3001;
+
+httpServer.listen(PORT, () => {
+  console.log(`Socket server running on port ${PORT}`);
 });
