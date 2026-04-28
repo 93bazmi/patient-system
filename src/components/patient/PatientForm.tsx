@@ -22,7 +22,6 @@ import InputField from "@/components/form/InputField";
 import SelectField from "@/components/form/SelectField";
 import { validatePatient } from "@/lib/validation/patient";
 import type { PatientFormType } from "@/types/patient";
-import { socket } from "@/lib/socket";
 
 type Props = {
   data: PatientFormType;
@@ -50,7 +49,6 @@ export default function PatientForm({
     };
 
     onChange(updated);
-    socket.emit("patient:status", "typing");
   };
 
   const handleSelectChange = (name: string, value: string) => {
@@ -82,6 +80,7 @@ export default function PatientForm({
     }
 
     onSubmit?.();
+    console.log("SUBMIT CALLED");
   };
 
   return (

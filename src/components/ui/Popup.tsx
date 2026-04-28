@@ -31,18 +31,21 @@ export default function Popup({
     success: {
       icon: <Check className="w-12 h-12 text-green-500" />,
       title: "Success",
+      bg: "bg-green-100",
     },
     error: {
       icon: <XCircle className="w-12 h-12 text-red-500" />,
-      title: "Error",
+      title: "Cannot submit",
+      bg: "bg-red-100",
     },
     info: {
       icon: <Info className="w-12 h-12 text-blue-500" />,
       title: "Info",
+      bg: "bg-blue-100",
     },
   };
 
-  const { icon, title } = config[type];
+  const { icon, title, bg } = config[type];
 
   if (variant === "toast") {
     return (
@@ -69,7 +72,7 @@ export default function Popup({
       <div className="relative w-full max-w-sm bg-white rounded-2xl shadow-lg p-6 text-center animate-fade-in">
         {/* icon */}
         <div className="flex justify-center mb-4">
-          <div className="bg-green-100 rounded-full p-3">{icon}</div>
+          <div className={`rounded-full p-3 ${bg}`}>{icon}</div>
         </div>
 
         {/* title */}

@@ -9,36 +9,52 @@ const io = new Server(httpServer, {
   },
 });
 
-io.on("connection", (socket) => {
-  console.log("Client connected:", socket.id);
+const patientNs = io.of("/patient");
+const staffNs = io.of("/staff");
+
+patientNs.on("connection", (socket) => {
+  console.log("Patient connected:", socket.id);
 
   let timer;
 
-  socket.on("patient:update", (data) => {
-    socket.broadcast.emit("patient:data", data);
+  // ส่งข้อมูลไป staff ทุกครั้งที่มีการอัพเดตจาก patient
+  socket.on("update", (data) => {
+    staffNs.emit("data", data);
   });
 
-  socket.on("patient:status", (status) => {
+  // ส่ง status ไป staff ทุกครั้งที่ patient มีการเปลี่ยนแปลงสถานะ
+  socket.on("status", (status) => {
     console.log("STATUS:", status);
 
-    socket.broadcast.emit("patient:status", status);
+    staffNs.emit("status", status);
 
-    if (status === "active") {
+    if (status === "typing") {
       clearTimeout(timer);
 
       timer = setTimeout(() => {
-        io.emit("patient:status", "inactive");
-      }, 5000);
+        staffNs.emit("status", "idle");
+      }, 10000);
     }
   });
 
+  // เช็คว่ามี staff ออนไลน์อยู่หรือไม่
+  socket.on("check:staff", (callback) => {
+    const staffOnline = staffNs.sockets.size > 0;
+    callback(staffOnline);
+  });
+
   socket.on("disconnect", () => {
-    console.log("Client disconnected");
+    console.log("Patient disconnected");
 
     clearTimeout(timer);
-    io.emit("patient:status", "inactive");
-    io.emit("patient:data", null);
+
+    staffNs.emit("status", "inactive");
+    staffNs.emit("data", null);
   });
+});
+
+staffNs.on("connection", (socket) => {
+  console.log("Staff connected:", socket.id);
 });
 
 httpServer.listen(3001, () => {

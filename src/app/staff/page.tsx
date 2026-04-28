@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import type { PatientFormType, PatientStatus } from "@/types/patient";
-import { socket } from "@/lib/socket";
+import { staffSocket } from "@/lib/socket/staffSocket";
 import PatientForm from "@/components/patient/PatientForm";
 import Popup from "@/components/ui/Popup";
 import {
@@ -81,14 +81,14 @@ export default function StaffView() {
 
   const [mounted, setMounted] = useState(false);
 
-  const connected = mounted ? socket.connected : false;
+  const connected = mounted ? staffSocket.connected : false;
 
   useEffect(() => {
     queueMicrotask(() => setMounted(true));
   }, []);
 
   useEffect(() => {
-    socket.connect();
+    staffSocket.connect();
 
     const update = () => forceUpdate({});
 
@@ -107,16 +107,16 @@ export default function StaffView() {
       }
     };
 
-    socket.on("connect", update);
-    socket.on("disconnect", update);
-    socket.on("patient:data", handleData);
-    socket.on("patient:status", handleStatus);
+    staffSocket.on("connect", update);
+    staffSocket.on("disconnect", update);
+    staffSocket.on("data", handleData);
+    staffSocket.on("status", handleStatus);
 
     return () => {
-      socket.off("connect", update);
-      socket.off("disconnect", update);
-      socket.off("patient:data", handleData);
-      socket.off("patient:status", handleStatus);
+      staffSocket.off("connect", update);
+      staffSocket.off("disconnect", update);
+      staffSocket.off("data", handleData);
+      staffSocket.off("status", handleStatus);
     };
   }, []);
 

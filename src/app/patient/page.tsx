@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { socket } from "@/lib/socket";
+import { patientSocket } from "@/lib/socket/patientSocket";
 import PatientForm from "@/components/patient/PatientForm";
 import type { PatientFormType } from "@/types/patient";
 import Popup from "@/components/ui/Popup";
@@ -23,26 +23,41 @@ export default function PatientPage() {
   });
 
   const [showPopup, setShowPopup] = useState(false);
+  const [popupType, setPopupType] = useState<"success" | "error">("success");
+
+  const handleChange = (updated: PatientFormType) => {
+    setForm(updated);
+    patientSocket.emit("status", "typing");
+  };
 
   const handleSubmit = () => {
-    socket.emit("patient:status", "submitted");
+    patientSocket.emit("check:staff", (isOnline: boolean) => {
+      if (!isOnline) {
+        setPopupType("error");
+        setShowPopup(true);
+        return;
+      }
 
-    setShowPopup(true);
+      patientSocket.emit("status", "submitted");
+
+      setPopupType("success");
+      setShowPopup(true);
+    });
   };
 
   useEffect(() => {
-    socket.connect();
-    socket.emit("patient:status", "idle");
+    patientSocket.connect();
+    patientSocket.emit("status", "idle");
 
     return () => {
-      socket.emit("patient:status", "inactive");
-      socket.disconnect();
+      patientSocket.emit("status", "inactive");
+      patientSocket.disconnect();
     };
   }, []);
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      socket.emit("patient:update", form);
+      patientSocket.emit("update", form);
     }, 200);
 
     return () => clearTimeout(timer);
@@ -50,7 +65,7 @@ export default function PatientPage() {
 
   useEffect(() => {
     const handleUnload = () => {
-      socket.emit("patient:status", "inactive");
+      patientSocket.emit("status", "inactive");
     };
 
     window.addEventListener("beforeunload", handleUnload);
@@ -63,11 +78,19 @@ export default function PatientPage() {
   return (
     <main className="min-h-screen bg-blue-50 flex items-center justify-center p-6">
       <div className="w-full max-w-5xl">
-        <PatientForm data={form} onChange={setForm} onSubmit={handleSubmit} />
+        <PatientForm
+          data={form}
+          onChange={handleChange}
+          onSubmit={handleSubmit}
+        />
         <Popup
           show={showPopup}
-          type="success"
-          message="Your form has been submitted successfully"
+          type={popupType}
+          message={
+            popupType === "success"
+              ? "Your form has been submitted successfully"
+              : "No staff available right now"
+          }
           onClose={() => setShowPopup(false)}
           variant="modal"
         />
