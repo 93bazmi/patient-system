@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { patientSocket } from "@/lib/socket/patientSocket";
+import { patientSocket } from "@/lib/socket";
 import PatientForm from "@/components/patient/PatientForm";
 import type { PatientFormType } from "@/types/patient";
 import Popup from "@/components/ui/Popup";

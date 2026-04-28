@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import type { PatientFormType, PatientStatus } from "@/types/patient";
-import { staffSocket } from "@/lib/socket/staffSocket";
+import { staffSocket } from "@/lib/socket";
 import PatientForm from "@/components/patient/PatientForm";
 import Popup from "@/components/ui/Popup";
 import {
