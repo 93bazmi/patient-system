@@ -7,12 +7,12 @@ import "dotenv/config";
 // For Production
 const BASE_URL = process.env.NEXT_PUBLIC_SOCKET_URL!;
 
-export const staffSocket = io(`${BASE_URL}/staff`, {
-  autoConnect: false,
-  transports: ["websocket"],
-});
-
 export const patientSocket = io(`${BASE_URL}/patient`, {
   autoConnect: false,
-  transports: ["websocket"],
+  transports: ["websocket", "polling"],
+});
+
+export const staffSocket = io(`${BASE_URL}/staff`, {
+  autoConnect: false,
+  transports: ["websocket", "polling"],
 });

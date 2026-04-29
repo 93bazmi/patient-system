@@ -13,6 +13,21 @@ export type PatientFormType = {
   religion: string;
 };
 
+export const emptyForm: PatientFormType = {
+  firstName: "",
+  middleName: "",
+  lastName: "",
+  dob: "",
+  gender: "",
+  phone: "",
+  email: "",
+  address: "",
+  language: "",
+  nationality: "",
+  emergency: "",
+  religion: "",
+};
+
 export type PatientStatus =  "inactive" | "submitted" | "idle" | "typing" ;
 
 export type InputFieldProps = {

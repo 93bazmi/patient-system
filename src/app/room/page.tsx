@@ -9,7 +9,7 @@ export default function SelectRoomPage() {
   const router = useRouter();
 
   const handleSelect = (room: string) => {
-    router.push(`/staff/${room}`);
+    router.push(`/room/${room}`);
   };
 
   return (
@@ -18,7 +18,7 @@ export default function SelectRoomPage() {
         {/* Title */}
         <div className="text-center mb-10">
           <h1 className="text-xl sm:text-2xl font-semibold text-gray-800">
-            Please select a room (Staff)
+            Please select a room
           </h1>
         </div>
 

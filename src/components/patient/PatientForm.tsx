@@ -29,6 +29,7 @@ type Props = {
   onChange?: (data: PatientFormType) => void;
   onSubmit?: () => void;
   readOnly?: boolean;
+  disabled?: boolean;
 };
 
 export default function PatientForm({
