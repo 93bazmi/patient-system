@@ -38,7 +38,7 @@ export default function PatientForm({
   readOnly = false,
 }: Props) {
   const [errors, setErrors] = React.useState<Record<string, string>>({});
-  const { register, scrollToError, fieldRefs } = useScrollToError();
+  const { register, scrollToError } = useScrollToError();
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,

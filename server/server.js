@@ -54,6 +54,11 @@ patientNs.on("connection", (socket) => {
     staffNs.emit("status", "inactive");
     staffNs.emit("data", null);
   });
+
+  socket.on("submit", (data) => {
+    // broadcast ไป staff
+    io.of("/staff").emit("data", data);
+  });
 });
 
 staffNs.on("connection", (socket) => {

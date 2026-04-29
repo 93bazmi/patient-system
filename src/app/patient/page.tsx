@@ -38,13 +38,14 @@ export default function PatientPage() {
         return;
       }
 
+      patientSocket.emit("submit", form);
+
       patientSocket.emit("status", "submitted");
 
       setPopupType("success");
       setShowPopup(true);
     });
   };
-
   useEffect(() => {
     patientSocket.connect();
     patientSocket.emit("status", "idle");

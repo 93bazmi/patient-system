@@ -30,5 +30,5 @@ export function useScrollToError() {
   };
 
   
-  return { register, scrollToError, fieldRefs };
+  return { register, scrollToError };
 }
