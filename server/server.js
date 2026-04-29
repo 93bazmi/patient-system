@@ -57,8 +57,8 @@ patientNs.on("connection", (socket) => {
   });
 
   socket.on("submit", (data) => {
-    // broadcast ไป staff
-    io.of("/staff").emit("data", data);
+    staffNs.emit("data", data);
+    staffNs.emit("status", "submitted");
   });
 });
 

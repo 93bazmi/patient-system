@@ -38,6 +38,8 @@ export default function PatientPage() {
         return;
       }
 
+      patientSocket.emit("update", form);
+
       patientSocket.emit("submit", form);
 
       patientSocket.emit("status", "submitted");
