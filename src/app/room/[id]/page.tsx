@@ -136,12 +136,13 @@ export default function PatientPage() {
   return (
     <div>
       <TopBar title={`Room ${roomId}`} showBack={true} backHref="/room" />
-      <main className="min-h-screen bg-blue-50 flex items-center justify-center p-6">
-        <div className="w-full max-w-5xl space-y-4">
+      <main className="min-h-screen bg-blue-50 flex  justify-center ">
+        <div className="w-full max-w-4xl mx-auto px-4 sm:px-6 py-6 space-y-6">
           {/* STATUS */}
           {serving && (
             <div className="text-yellow-600 text-sm">
-              กำลังให้บริการ กรุณารอสักครู่...
+              Waiting for staff to serve you... If it takes too long, please
+              contact the staff. Thank you.
             </div>
           )}
 
@@ -159,8 +160,8 @@ export default function PatientPage() {
             type={popupType}
             message={
               popupType === "success"
-                ? "ส่งข้อมูลสำเร็จ"
-                : "ไม่สามารถส่งข้อมูลได้ เนื่องจากไม่มีเจ้าหน้าที่ในห้อง"
+                ? "Your information has been submitted successfully!"
+                : "No staff available right now. Please wait or contact the staff. Thank you."
             }
             onClose={() => setShowPopup(false)}
             variant="modal"

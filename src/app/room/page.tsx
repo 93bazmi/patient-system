@@ -17,7 +17,7 @@ export default function SelectRoomPage() {
       <div className="w-full max-w-5xl">
         {/* Title */}
         <div className="text-center mb-10">
-          <h1 className="text-xl sm:text-2xl font-semibold text-gray-800">
+          <h1 className="text-xl sm:text-2xl font-semibold text-gray-600">
             Please select a room
           </h1>
         </div>
@@ -28,7 +28,7 @@ export default function SelectRoomPage() {
             <button
               key={room}
               onClick={() => handleSelect(room)}
-              className="group w-full h-40 sm:h-48 md:h-56 lg:h-64 xl:h-80 rounded-3xl bg-white border border-gray-200 flex flex-col items-center justify-center gap-4 transition hover:shadow-md active:scale-[0.98]"
+              className="group w-full h-40 sm:h-48 md:h-56 lg:h-64 xl:h-80 rounded-3xl bg-white border border-gray-200 flex flex-col items-center justify-center gap-4 transition hover:shadow-md active:scale-[0.98] "
             >
               {/* Icon */}
               <div className="w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 rounded-2xl bg-blue-100 flex items-center justify-center group-hover:bg-blue-200 transition">
@@ -36,7 +36,7 @@ export default function SelectRoomPage() {
               </div>
 
               {/* Text */}
-              <span className="text-xl sm:text-2xl font-semibold text-gray-800">
+              <span className="text-xl sm:text-2xl font-semibold text-gray-600 ">
                 Room {room}
               </span>
             </button>
