@@ -21,7 +21,21 @@ export function validatePatient(data: PatientForm): PatientErrors {
 
   if (!data.firstName) errors.firstName = "First name is required";
   if (!data.lastName) errors.lastName = "Last name is required";
-  if (!data.dob) errors.dob = "Date of birth is required";
+
+  if (!data.dob) {
+  errors.dob = "Date of birth is required";
+} else {
+  const today = new Date();
+  const dob = new Date(data.dob);
+
+  
+  today.setHours(0, 0, 0, 0);
+  dob.setHours(0, 0, 0, 0);
+
+  if (dob > today) {
+    errors.dob = "Please enter a valid date of birth (not in the future)";
+  }
+}
   if (!data.gender) errors.gender = "Gender is required";
 
   if (!data.phone) {

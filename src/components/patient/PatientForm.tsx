@@ -22,6 +22,7 @@ import InputField from "@/components/form/InputField";
 import SelectField from "@/components/form/SelectField";
 import { validatePatient } from "@/lib/validation/patient";
 import type { PatientFormType } from "@/types/patient";
+import { useScrollToError } from "../hook/useScrollToError";
 
 type Props = {
   data: PatientFormType;
@@ -37,6 +38,7 @@ export default function PatientForm({
   readOnly = false,
 }: Props) {
   const [errors, setErrors] = React.useState<Record<string, string>>({});
+  const { register, scrollToError, fieldRefs } = useScrollToError();
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
@@ -67,20 +69,14 @@ export default function PatientForm({
     if (Object.keys(validationErrors).length > 0) {
       const firstErrorField = Object.keys(validationErrors)[0];
 
-      const el = document.querySelector(
-        `[name="${firstErrorField}"]`,
-      ) as HTMLElement | null;
-
-      if (el) {
-        el.scrollIntoView({ behavior: "smooth", block: "center" });
-        el.focus();
-      }
+      requestAnimationFrame(() => {
+        scrollToError(firstErrorField);
+      });
 
       return;
     }
 
     onSubmit?.();
-    console.log("SUBMIT CALLED");
   };
 
   return (
@@ -91,7 +87,7 @@ export default function PatientForm({
         <HeartPulse className="w-8 h-8" />
         Patient Form{" "}
       </div>
-      <form onSubmit={handleSubmit} className="space-y-6">
+      <form noValidate onSubmit={handleSubmit} className="space-y-6">
         {/* Personal Information */}
         <Section title="Personal Information" icon={<User />}>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
@@ -101,6 +97,7 @@ export default function PatientForm({
               value={data.firstName}
               onChange={handleChange}
               error={errors.firstName}
+              ref={register("firstName")}
               required
               readOnly={readOnly}
             />
@@ -111,6 +108,7 @@ export default function PatientForm({
               value={data.middleName}
               onChange={handleChange}
               error={errors.middleName}
+              ref={register("middleName")}
               readOnly={readOnly}
             />
             <InputField
@@ -119,6 +117,7 @@ export default function PatientForm({
               value={data.lastName}
               onChange={handleChange}
               error={errors.lastName}
+              ref={register("lastName")}
               required
               readOnly={readOnly}
             />
@@ -133,9 +132,9 @@ export default function PatientForm({
               value={data.dob}
               onChange={handleChange}
               error={errors.dob}
+              ref={register("dob")}
               required
               readOnly={readOnly}
-              max={new Date().toISOString().split("T")[0]}
             />
             <SelectField
               label="Gender"
@@ -147,6 +146,7 @@ export default function PatientForm({
               ]}
               onChange={(val) => handleSelectChange("gender", val)}
               error={errors.gender}
+              ref={register("gender")}
               required
               readOnly={readOnly}
             />
@@ -164,6 +164,7 @@ export default function PatientForm({
               value={data.phone}
               onChange={handleChange}
               error={errors.phone}
+              ref={register("phone")}
               required
               readOnly={readOnly}
             />
@@ -176,6 +177,7 @@ export default function PatientForm({
               value={data.email}
               onChange={handleChange}
               error={errors.email}
+              ref={register("email")}
               readOnly={readOnly}
             />
           </div>
@@ -188,6 +190,7 @@ export default function PatientForm({
             value={data.address}
             onChange={handleChange}
             error={errors.address}
+            ref={register("address")}
             required
             readOnly={readOnly}
           />
@@ -203,6 +206,7 @@ export default function PatientForm({
               value={data.language}
               onChange={handleChange}
               error={errors.language}
+              ref={register("language")}
               required
               readOnly={readOnly}
             />
@@ -213,6 +217,7 @@ export default function PatientForm({
               value={data.nationality}
               onChange={handleChange}
               error={errors.nationality}
+              ref={register("nationality")}
               required
               readOnly={readOnly}
             />
@@ -227,6 +232,7 @@ export default function PatientForm({
               value={data.emergency}
               onChange={handleChange}
               error={errors.emergency}
+              ref={register("emergency")}
               readOnly={readOnly}
             />
             <InputField
@@ -237,6 +243,7 @@ export default function PatientForm({
               value={data.religion}
               onChange={handleChange}
               error={errors.religion}
+              ref={register("religion")}
               readOnly={readOnly}
             />
           </div>
