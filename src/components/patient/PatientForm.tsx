@@ -83,8 +83,6 @@ export default function PatientForm({
     console.log("SUBMIT CALLED");
   };
 
-  const [openCalendar, setOpenCalendar] = React.useState(false);
-
   return (
     <div className="bg-white p-6 rounded-xl shadow-md space-y-6">
       {/* Header */}{" "}
@@ -128,6 +126,7 @@ export default function PatientForm({
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <InputField
+              icon={<CalendarDays />}
               label="Date of Birth"
               name="dob"
               type="date"
@@ -137,7 +136,6 @@ export default function PatientForm({
               required
               readOnly={readOnly}
               max={new Date().toISOString().split("T")[0]}
-              onClick={() => setOpenCalendar(true)}
             />
             <SelectField
               label="Gender"
@@ -256,22 +254,6 @@ export default function PatientForm({
           </div>
         )}
       </form>
-      {openCalendar && (
-        <div className="fixed inset-0 bg-black/30 flex items-center justify-center">
-          <div className="bg-white p-4 rounded-lg">
-            <p>Select date (mock)</p>
-
-            <button
-              onClick={() => {
-                handleSelectChange("dob", "2026-04-29"); // set ค่า
-                setOpenCalendar(false);
-              }}
-            >
-              Set Today
-            </button>
-          </div>
-        </div>
-      )}
     </div>
   );
 }

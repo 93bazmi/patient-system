@@ -80,7 +80,14 @@ focus:ring-2 focus:ring-blue-200 focus:outline-none focus:bg-white ${
         className="relative"
         onClick={(e) => {
           if (!containerIsButton) return;
-          props.onClick?.(e);
+
+          const input = e.currentTarget.querySelector(
+            "input",
+          ) as HTMLInputElement;
+
+          // iOS workaround
+          input?.showPicker?.();
+          input?.focus();
         }}
       >
         {icon && (
@@ -92,19 +99,28 @@ focus:ring-2 focus:ring-blue-200 focus:outline-none focus:bg-white ${
         <input
           {...props}
           type={type || "text"}
-          style={{ minWidth: 0 }}
+          placeholder={readOnly ? "" : props.placeholder}
+          value={
+            readOnly && required && !hasValue
+              ? "Not yet filled out."
+              : isDate
+                ? normalizeDate(props.value as string)
+                : props.value
+          }
+          disabled={disabled}
+          readOnly={readOnly}
           className={`h-11 w-full flex-1 min-w-0 appearance-none overflow-hidden
   bg-blue-50 rounded-lg px-3 py-2 border 
   ${error ? "border-red-400" : "border-transparent"}
   focus:bg-white focus:ring-2 focus:ring-blue-100 focus:outline-none transition
   ${icon ? "pl-12" : ""}
-  ${
-    readOnly
-      ? hasValue
-        ? "text-gray-700 cursor-default caret-transparent"
-        : "bg-gray-100 text-gray-400 cursor-default caret-transparent"
-      : "focus:ring-blue-200"
-  } ${containerIsButton ? "pointer-events-none" : ""}
+          } ${
+            readOnly
+              ? hasValue
+                ? "bg-blue-50 text-gray-700 cursor-default caret-transparent"
+                : "bg-gray-100 text-gray-400 cursor-default caret-transparent"
+              : "bg-blue-50 focus:bg-white focus:ring-2 focus:ring-blue-200"
+          } ${containerIsButton ? "pointer-events-none" : ""}
 `}
         />
       </div>
