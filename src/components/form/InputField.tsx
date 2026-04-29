@@ -80,14 +80,7 @@ focus:ring-2 focus:ring-blue-200 focus:outline-none focus:bg-white ${
         className="relative"
         onClick={(e) => {
           if (!containerIsButton) return;
-
-          const input = e.currentTarget.querySelector(
-            "input",
-          ) as HTMLInputElement;
-
-          // iOS workaround
-          input?.showPicker?.();
-          input?.focus();
+          props.onClick?.(e);
         }}
       >
         {icon && (

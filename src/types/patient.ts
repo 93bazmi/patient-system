@@ -29,5 +29,6 @@ export type InputFieldProps = {
   max?: string;
   disabled?: boolean;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onClick?: React.MouseEventHandler<HTMLElement>;
 };
 
