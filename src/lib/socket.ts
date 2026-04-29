@@ -1,4 +1,7 @@
 import { io } from "socket.io-client";
+import "dotenv/config";
+
+// const BASE_URL = process.env.NEXT_PUBLIC_BACKEND_URL;
 const BASE_URL = process.env.NEXT_PUBLIC_SOCKET_URL!;
 
 export const staffSocket = io(`${BASE_URL}/staff`, {
