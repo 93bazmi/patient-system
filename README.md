@@ -1,36 +1,97 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# **Patient Management System** 🩺
+A real-time patient management system designed to streamline communication and workflow between patients and medical staff. The system allows patients to submit information while staff can monitor, update, and manage patient status in real time.
 
-## Getting Started
+## 🚀 Features
 
-First, run the development server:
+* **Patient Form Submission** 👤    
+Patients can fill out and submit their medical information easily.
+
+* **Real-Time Updates** 🔄   
+Uses WebSocket via Socket.IO for instant synchronization between patient and staff views.
+
+* **Live Form Activity Monitoring** 📡   
+Staff can see when a patient is actively filling out the form before submission.
+
+* **Staff Dashboard** 🧑‍⚕️   
+Staff can monitor patient activity and track their current state (inactive, filling, submitted) in real time.
+
+* **_Room-Based Management_** ⭐    
+Supports multiple rooms, allowing staff to handle patients in parallel without interference.
+
+* **_Session Completion_** ⭐     
+Once the patient has submitted their information and the interaction is complete, staff can mark the session as completed.
+
+## 🛠️ Tech Stack
+* Frontend: Next.js (App Router, Client Components)
+* Backend: Node.js + Socket Server
+* Realtime Communication: Socket.IO
+* Styling: Tailwind CSS
+* Deployment: Vercel(Frontend), Render(Backend)
+
+## ⚙️ Installation & Setup
+
+### 1. Clone the repository
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/93bazmi/patient-system.git
+cd patient-system
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 2. Install dependencies
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm install
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 3. Set up environment variables
 
-## Learn More
+Create a `.env` file in the root directory and add:
 
-To learn more about Next.js, take a look at the following resources:
+```env
+// Backend server configuration
+PORT=3001
+NEXT_PUBLIC_SOCKET_URL=http://localhost:3001
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+// Frontend configuration
+NEXT_PUBLIC_BASE_URL=http://localhost:3000
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### 4. Run the development server
 
-## Deploy on Vercel
+```bash
+# frontend
+npm run dev
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+# socket server
+node server/server.js
+or
+npm run socket
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### 5. Open in your browser
+http://localhost:3000
+
+## 👤 Patient Flow
+- Open the system
+- Select your assigned room
+- Fill out the form
+- Submit your information
+- Wait for staff interaction
+- Once finished, the session will be marked as completed by staff
+
+## 🧑‍⚕️ Staff Flow
+- Go to `/staff`
+- Select your assigned room
+- Wait for incoming patients
+- View patient information in real time
+- Interact with the patient
+- Click **Complete** when finished
+- The room is ready for the next patient
+
+## 📌 Future Improvements
+- Authentication system (staff login)
+- Database integration (e.g., MongoDB / PostgreSQL)
+- Patient history tracking (store and review past sessions)
+- Search and filter functionality for patient records
+
+
