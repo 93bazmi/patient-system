@@ -57,6 +57,15 @@ focus:ring-2 focus:ring-blue-200 focus:outline-none focus:bg-white ${
     );
   }
 
+  const isDate = type === "date";
+  const containerIsButton = isDate && !readOnly && !disabled;
+
+  const normalizeDate = (date: string) => {
+    if (!date) return "";
+    const d = new Date(date);
+    return d.toISOString().split("T")[0]; // ✅ YYYY-MM-DD
+  };
+
   return (
     <div className="flex flex-col gap-1">
       <label className="text-sm text-gray-600 font-medium">
@@ -67,7 +76,20 @@ focus:ring-2 focus:ring-blue-200 focus:outline-none focus:bg-white ${
         {required && <span className="text-red-500 ml-1">*</span>}
       </label>
 
-      <div className="relative ">
+      <div
+        className="relative"
+        onClick={(e) => {
+          if (!containerIsButton) return;
+
+          const input = e.currentTarget.querySelector(
+            "input",
+          ) as HTMLInputElement;
+
+          // iOS workaround
+          input?.showPicker?.();
+          input?.focus();
+        }}
+      >
         {icon && (
           <div className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 ">
             {icon}
@@ -81,9 +103,12 @@ focus:ring-2 focus:ring-blue-200 focus:outline-none focus:bg-white ${
           value={
             readOnly && required && !hasValue
               ? "Not yet filled out."
-              : props.value
+              : isDate
+                ? normalizeDate(props.value as string)
+                : props.value
           }
           disabled={disabled}
+          readOnly={readOnly}
           className={`h-11 w-full min-w-0 overflow-hidden bg-blue-50 rounded-lg px-3 py-2 border 
           ${error ? "border-red-400" : "border-transparent"}
           focus:bg-white focus:ring-2 focus:ring-blue-100 focus:outline-none transition ${
@@ -94,7 +119,8 @@ focus:ring-2 focus:ring-blue-200 focus:outline-none focus:bg-white ${
                 ? "bg-blue-50 text-gray-700 cursor-default caret-transparent"
                 : "bg-gray-100 text-gray-400 cursor-default caret-transparent"
               : "bg-blue-50 focus:bg-white focus:ring-2 focus:ring-blue-200"
-          }`}
+          } ${containerIsButton ? "pointer-events-none" : ""}
+`}
         />
       </div>
 
