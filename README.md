@@ -1,6 +1,28 @@
 # **Patient Management System** 🩺
 A real-time patient management system designed to streamline communication and workflow between patients and medical staff. The system allows patients to submit information while staff can monitor, update, and manage patient status in real time.
 
+## 💙 Live Demo
+
+* For Patient: https://patient-system-beta.vercel.app
+* For Staff: https://patient-system-beta.vercel.app/staff
+
+## 👤 Patient Flow
+- Open the system
+- Select your assigned room
+- Fill out the form
+- Submit your information
+- Wait for staff interaction
+- Once finished, the session will be marked as completed by staff
+
+## 🧑‍⚕️ Staff Flow
+- Go to `/staff`
+- Select your assigned room
+- Wait for incoming patients
+- View patient information in real time
+- Interact with the patient
+- Click **Complete** when finished
+- The room is ready for the next patient
+
 ## 🚀 Features
 
 * **Patient Form Submission** 👤    
@@ -70,23 +92,6 @@ npm run socket
 
 ### 5. Open in your browser
 http://localhost:3000
-
-## 👤 Patient Flow
-- Open the system
-- Select your assigned room
-- Fill out the form
-- Submit your information
-- Wait for staff interaction
-- Once finished, the session will be marked as completed by staff
-
-## 🧑‍⚕️ Staff Flow
-- Go to `/staff`
-- Select your assigned room
-- Wait for incoming patients
-- View patient information in real time
-- Interact with the patient
-- Click **Complete** when finished
-- The room is ready for the next patient
 
 ## 📌 Future Improvements
 - Authentication system (staff login)
