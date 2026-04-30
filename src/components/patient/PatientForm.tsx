@@ -22,7 +22,7 @@ import InputField from "@/components/form/InputField";
 import SelectField from "@/components/form/SelectField";
 import { validatePatient } from "@/lib/validation/patient";
 import type { PatientFormType } from "@/types/patient";
-import { useScrollToError } from "../hook/useScrollToError";
+import { useScrollToError } from "@/hook/useScrollToError";
 
 type Props = {
   data: PatientFormType;
