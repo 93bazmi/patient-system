@@ -1,4 +1,4 @@
-# **Patient Management System** 🩺
+# **Patient System** 🩺
 A real-time patient management system designed to streamline communication and workflow between patients and medical staff. The system allows patients to submit information while staff can monitor, update, and manage patient status in real time.
 
 ## 💚 Live Demo
