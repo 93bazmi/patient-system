@@ -93,6 +93,15 @@ npm run socket
 ### 5. Open in your browser
 http://localhost:3000
 
+## 📸 Screenshots
+
+![Patient Room](./screenshots/room-patient.png)
+![Staff Room](./screenshots/room-staff.png)
+![](./screenshots/patient-filling.png)
+![](./screenshots/staff-filling.png)
+![](./screenshots/patient-success.png)
+![](./screenshots/staff-success.png)
+
 ## 📌 Future Improvements
 - Authentication system (staff login)
 - Database integration (e.g., MongoDB / PostgreSQL)
