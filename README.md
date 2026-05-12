@@ -1,10 +1,21 @@
-# **Patient Management System** 🩺
-A real-time patient management system designed to streamline communication and workflow between patients and medical staff. The system allows patients to submit information while staff can monitor, update, and manage patient status in real time.
+# **Patient System** 🩺
+A real-time patient system designed to streamline communication and workflow between patients and medical staff. The system allows patients to submit information while staff can monitor, update, and manage patient status in real time.
 
-## 💙 Live Demo
+## 💚 Live Demo
 
 * For Patient: https://patient-system-beta.vercel.app
 * For Staff: https://patient-system-beta.vercel.app/staff
+
+## 📘 Documentation
+
+This folder contains the development planning documentation for the Patient System.
+### Contents
+
+- [Project Structure](./doc/project-structure.md)
+- [Design](./doc/design.md)
+- [Component Architecture](./doc/components.md)
+- [Real-Time Synchronization Flow](./doc/realtime.md)
+
 
 ## 👤 Patient Flow
 - Open the system
